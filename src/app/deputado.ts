@@ -7,9 +7,12 @@ export type Deputado = {
       siglaUf: string,
       idLegislatura: number,
       urlFoto: string,
-      email: string
+      email: string,
+      siglaSexo:string
 }
 
 export type DeputadoResponse = {
     dados: Deputado[]
 }
+
+

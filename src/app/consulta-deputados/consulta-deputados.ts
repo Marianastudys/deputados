@@ -1,20 +1,41 @@
 import { Component, inject, signal } from '@angular/core';
 import { DeputadoService } from '../deputado-service';
 import { Deputado } from '../deputado';
-import { NgClass } from "../../../node_modules/@angular/common/types/_common_module-chunk";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-consulta-deputados',
-  imports: [NgClass],
+  imports: [ReactiveFormsModule],
   templateUrl: './consulta-deputados.html',
   styleUrl: './consulta-deputados.scss',
 })
 export class ConsultaDeputados {
   #deputadoService = inject(DeputadoService)
   protected deputados = signal<Deputado[]>([])
+  #formBuilder = inject(FormBuilder);
+  protected formDeputados: FormGroup;
+
+
+
  constructor(){
-  this.#deputadoService.obterTodos().subscribe(res => {
+
+  this.formDeputados = this.#formBuilder.group({
+      nome: ['', Validators.required],
+    });
+  }
+  obterTodos() {
+    this.#deputadoService.obterTodos().subscribe(res => {
     this.deputados.set(res.dados)
   })
+  
+  }
+  
+  obterDeputadosPorSexo(siglaSexo: string) {
+    this.#deputadoService.obterDeputadosPorSexo(siglaSexo).subscribe(res=> {
+    this.deputados.set(res.dados)
+  })
+  }
+
  }
-}
+

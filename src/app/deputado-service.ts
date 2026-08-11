@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DeputadoResponse } from './deputado';
+import { DeputadoResponse} from './deputado';
 
 @Service()
 export class DeputadoService {
@@ -10,5 +10,9 @@ export class DeputadoService {
 
     obterTodos(): Observable<DeputadoResponse> {
         return this.#http.get<DeputadoResponse>(`${this.API}/deputados?ordem=ASC&ordenarPor=nome`)
+    }
+
+    obterDeputadosPorSexo(siglaSexo: string): Observable<DeputadoResponse> {
+        return this.#http.get<DeputadoResponse>(`${this.API}/deputados?siglaSexo=${siglaSexo}&ordem=ASC&ordenarPor=nome`)
     }
 }

@@ -1,5 +1,24 @@
-<h1>Deputados</h1>
+<h1 class="titulo">Deputados</h1>
+<div class="deputados">
+<form [formGroup]="formDeputados"
+      (ngSubmit)="obterDeputadosPorSexo(formDeputados.value.siglaSexo)">
+
+    <input
+        type="text"
+        formControlName="nome"
+        placeholder="Digite o sexo do deputado(a)">
+
+    <button type="submit">
+        Buscar
+    </button>
+
+</form>
 @for(dep of deputados(); track dep.id) {
-    <p>{{dep.nome}}</p>
-    <p><img [src]="dep.urlFoto"></p>
+    <div class="card-deputado">
+        <p>{{dep.nome}}</p>
+        <p><img [src]="dep.urlFoto"></p>
+        <p>{{dep.nome}}</p>
+        <p>{{dep.siglaPartido}} - {{dep.siglaUf}}</p>
+    </div>   
 }
+</div>
