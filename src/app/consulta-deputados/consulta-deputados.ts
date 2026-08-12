@@ -21,7 +21,7 @@ export class ConsultaDeputados {
  constructor(){
 
   this.formDeputados = this.#formBuilder.group({
-      nome: ['', Validators.required],
+      sexo: ['', Validators.required],
     });
   }
   obterTodos() {
