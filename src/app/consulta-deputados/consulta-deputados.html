@@ -1,24 +1,47 @@
 <h1 class="titulo">Deputados</h1>
+
+<div class="pesquisa">
+
+    <form
+        [formGroup]="formDeputados"
+        (ngSubmit)="obterDeputadosPorSexo(formDeputados.value.sexo)">
+
+        <input
+            type="text"
+            formControlName="sexo"
+            placeholder="Digite o sexo do deputado(a)">
+
+        @if (
+            formDeputados.get('sexo')?.invalid &&
+            formDeputados.get('sexo')?.touched
+        ) {
+            <p class="erro">
+                Digite apenas F ou M, em letras maiúsculas.
+            </p>
+        }
+
+        <button type="submit">
+            Buscar
+        </button>
+
+    </form>
+</div>
 <div class="deputados">
-<form [formGroup]="formDeputados"
-      (ngSubmit)="obterDeputadosPorSexo(formDeputados.value.sexo)">
+    @for(dep of deputados(); track dep.id) {
 
-    <input
-        type="text"
-        formControlName="sexo"
-        placeholder="Digite o sexo do deputado(a)">
+        <div class="card-deputado">
 
-    <button type="submit">
-        Buscar
-    </button>
+            <p class="nome-deputado">
+                {{dep.nome}}
+            </p>
 
-</form>
-@for(dep of deputados(); track dep.id) {
-    <div class="card-deputado">
-        <p>{{dep.nome}}</p>
-        <p><img [src]="dep.urlFoto"></p>
-        <p>{{dep.nome}}</p>
-        <p>{{dep.siglaPartido}} - {{dep.siglaUf}}</p>
-    </div>   
-}
+            <img
+                [src]="dep.urlFoto"
+                [alt]="'Foto de ' + dep.nome">
+
+            <p>
+                {{dep.siglaPartido}} - {{dep.siglaUf}}
+            </p>
+        </div>
+    }
 </div>

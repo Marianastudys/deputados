@@ -1,25 +1,69 @@
 .titulo {
     text-align: center;
+    margin-bottom: 25px;
+}
+
+.pesquisa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.pesquisa form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 320px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #bdbdbd;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #4f46e5;
+    color: white;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #4338ca;
 }
 
 .deputados {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 16px;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
 }
 
 .card-deputado {
+    width: 220px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 200px;
-    min-height: auto;
-    border: 1px solid #000;
-    border-radius: 8px;
 }
 
 .card-deputado img {
     width: 150px;
     height: auto;
+    border-radius: 8px;
+}
+
+.nome-deputado {
+    font-weight: bold;
 }

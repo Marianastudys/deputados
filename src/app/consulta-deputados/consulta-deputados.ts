@@ -16,14 +16,15 @@ export class ConsultaDeputados {
   #formBuilder = inject(FormBuilder);
   protected formDeputados: FormGroup;
 
-
-
  constructor(){
-
   this.formDeputados = this.#formBuilder.group({
-      sexo: ['', Validators.required],
+       sexo: ['', [
+        Validators.required,
+        Validators.pattern(/^[FM]$/)
+      ]]
     });
   }
+
   obterTodos() {
     this.#deputadoService.obterTodos().subscribe(res => {
     this.deputados.set(res.dados)
@@ -32,8 +33,12 @@ export class ConsultaDeputados {
   }
   
   obterDeputadosPorSexo(siglaSexo: string) {
-    this.#deputadoService.obterDeputadosPorSexo(siglaSexo).subscribe(res=> {
-    this.deputados.set(res.dados)
+     if (this.formDeputados.invalid) {
+      return;
+    }
+    
+    this.#deputadoService.obterDeputadosPorSexo(siglaSexo).subscribe(res => {
+    this.deputados.set(res.dados);
   })
   }
 
